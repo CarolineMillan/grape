@@ -31,13 +31,12 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Uncomment this block to pass the first stage
-   
     std::string input_line;
     std::getline(std::cin, input_line);
    
     try {
         // create nfa here
+        // don't need a parser and a compiler, it's a waste ju have one engie to create the nfa
         Parser parser;
         Compiler compiler;
         vector<Token> tokens = parser.parse(pattern);

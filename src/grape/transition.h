@@ -5,17 +5,14 @@
 struct State;
 
 // an escape character that means this transition doesn't consume a char
-const char EPSILON = '\0';
+//const char EPSILON = '\0';
 
 struct Transition {
     State* target;
-    char symbol;
+    std::optional<char> symbol;
 
 public:
-    Transition(char symbol, State* target) {
-        this->target = target;
-        this->symbol = symbol;
-    }
+    Transition(std::optional<char> symbol, State* target): target(target), symbol(symbol) {}
     Transition()=default;
     ~Transition()=default;
 };

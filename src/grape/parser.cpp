@@ -40,7 +40,7 @@ void Parser::tokenize(const string &pattern) {
         if (ch == '\\') {
             // look at the next char that's being escaped, that will give you the token::KIND
             // maybe do this in a separate parse_escaped() method
-            if (i+1 == pattern.size()-1) {
+            if (i+1 >= pattern.size()-1) {
                 // then it's the last char and it's not escaping anything, so just add the literal
                 Token t;
                 t.ch = ch;
@@ -56,7 +56,7 @@ void Parser::tokenize(const string &pattern) {
             }
         }
         else if (ch == '[') {
-            if (i+1 == pattern.size()-1) {
+            if (i+1 >= pattern.size()-1) {
                 // then it's the last char and it's not escaping anything, so just add the literal
                 Token t;
                 t.ch = ch;
@@ -167,7 +167,7 @@ int Parser::parse_char_class(const string &pattern, int i) {
         for (int j = original_index; j < pattern.size(); j++) {
             Token t_lit;
             t_lit.kind = Token::KIND::Literal;
-            t_lit.ch = pattern[i];
+            t_lit.ch = pattern[j];
             tokens.push_back(t_lit);
         }
     }

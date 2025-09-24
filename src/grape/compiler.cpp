@@ -14,10 +14,14 @@
 
 using std::stack, std::unique_ptr;
 
+constexpr std::optional<char> EPSILON = std::nullopt;
+
 NFA Compiler::compile(vector<Token>& tokens) {
         // Thompson's construction
         stack<NFAFragment> fragments;
         //vector<unique_ptr<State>> states;
+
+        // TODO if you can allocate space for the vector upfront then you don't need smart pointers
         NFA nfa = NFA();
 
         for (Token& token : tokens) {
@@ -189,7 +193,7 @@ NFA Compiler::compile(vector<Token>& tokens) {
         // final fragment on stack will be the start and accept states for the NFA
         if (fragments.size() == 1) {
                 NFAFragment final = fragments.top();
-                nfa.add_final_fragment(&final);
+                nfa.add_final_fragment(final);
                 return nfa;
         }
         else {
