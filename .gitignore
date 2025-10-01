@@ -1,49 +1,21 @@
-# Prerequisites
-*.d
+# Directories
+.vs/
+Binaries/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Files
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.sln
+*.log
+Makefile
 
-# Precompiled Headers
-*.gch
-*.pch
+# Exclude
+!Vendor/Binaries
 
-# Linker files
-*.ilk
+Binaries
+Vendor
 
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
-
-notes.md
-.DS_Store
 .idea
-.vscode
 
-build
-cmake-build-debug
+.DS_Store

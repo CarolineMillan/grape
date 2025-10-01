@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-
-#include "grape/compiler.h"
-#include "grape/nfa.h"
-#include "grape/parser.h"
-#include "grape/token.h"
+#include "../../Core/Source/Core/nfa.h"
+#include "../../Core/Source/Core/parser.h"
+#include "../../Core/Source/Core/token.h"
+#include "../../Core/Source/Core/compiler.h"
 
 //throw std::runtime_error("Unhandled pattern " + pattern);
 
@@ -26,6 +25,7 @@ int main(int argc, char* argv[]) {
 
     // do i really need this? I don't think I need a flag
     // what I do need is to figure out how to make this a cli tool that you can use by calling grape
+
     if (flag != "-E") {
         std::cerr << "Expected first argument to be '-E'" << std::endl;
         return 1;
