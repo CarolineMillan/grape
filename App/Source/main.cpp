@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
 #include "../../Core/Source/Core/nfa.h"
-#include "../../Core/Source/Core/parser.h"
+#include "../../Core/Source/Core/regex_compiler.h"
 #include "../../Core/Source/Core/token.h"
-#include "../../Core/Source/Core/compiler.h"
 
 //throw std::runtime_error("Unhandled pattern " + pattern);
 
@@ -37,9 +36,8 @@ int main(int argc, char* argv[]) {
     try {
         // create nfa here
         // don't need a parser and a compiler, it's a waste just have one engine to create the nfa
-        Parser parser;
-        Compiler compiler;
-        vector<Token> tokens = parser.parse(pattern);
+        RegexCompiler compiler;
+        vector<Token> tokens = compiler.parse(pattern);
         NFA nfa = compiler.compile(tokens);
 
         if (nfa.run(input_line)) {

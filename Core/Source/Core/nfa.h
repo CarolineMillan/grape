@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "nfa_fragment.h"
-#include "parser.h"
 #include "state.h"
 
 using std::vector, std::unique_ptr, std::unordered_set;

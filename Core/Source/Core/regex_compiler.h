@@ -6,14 +6,17 @@
 
 #include <vector>
 #include "token.h"
+#include "nfa.h"
 
 using std::vector, std::string;
 
-class Parser {
+class RegexCompiler {
 public:
-    Parser() = default;
-    ~Parser() = default;
+    RegexCompiler() = default;
+    ~RegexCompiler() = default;
     vector<Token> parse(const string& pattern);
+    // compile to NFA
+    NFA compile(vector<Token>& tokens);
 
 private:
     vector<Token> tokens;
@@ -30,4 +33,5 @@ private:
 
     // convert to postfix notation
     void to_postfix();
+
 };
