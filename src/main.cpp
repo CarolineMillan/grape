@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
    
     try {
         // create nfa here
-        // don't need a parser and a compiler, it's a waste ju have one engie to create the nfa
+        // don't need a parser and a compiler, it's a waste just have one engine to create the nfa
         Parser parser;
         Compiler compiler;
         vector<Token> tokens = parser.parse(pattern);
