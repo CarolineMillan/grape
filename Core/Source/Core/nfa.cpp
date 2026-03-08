@@ -22,25 +22,20 @@ bool NFA::run(std::string const& input_string) {
     // this can be a helper function, find epsilon closures from a given start state (or set of start states?), returns all states reachable by epsilons alone
     unordered_set<State*> current_states = {start};
     epsilon_closures(current_states);
-    //std::cout << "c: " << current_states.size() << std::endl;
 
     for (const char ch : input_string) {
-        //std::cout << ch << std::endl;
         unordered_set<State*> next_candidates;
         for (State* state : current_states) {
             // I want to add to next candidates every time, so initialise it outside of this for loop, then extend it inside this for loop, then get next_states at the end of this for loop (ie next states at the end of the loop for this character)
             unordered_set<State*> targets = state->get_targets(ch);
-            //std::cout << "targets: " << targets.size() << std::endl;
             next_candidates.insert(targets.begin(), targets.end());
         }
-        // do we rewrite current_states here or do we want to insert next_candidates into it?
         epsilon_closures(next_candidates);
         current_states = std::move(next_candidates);
         //current_states.insert(next_candidates.begin(), next_candidates.end());
     }
 
     // if nfa.accept is in current_states, return true, else false
-    //std::cout << "c2: " << current_states.size() << std::endl;
     if (current_states.find(accept) != current_states.end()) {return true;}
     return false;
 }
@@ -51,7 +46,6 @@ void NFA::dfsr(unordered_set<State*>& visited, State* current_state) {
     vector<State*> neighbours;
     for (Transition transition: current_state->transitions) {
         if (!transition.symbol) {
-            //std::cout << "epsilon" << std::endl;
             // this is getting a list of neighbours
             neighbours.emplace_back(transition.target);
         }

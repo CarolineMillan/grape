@@ -33,15 +33,12 @@ void RegexCompiler::tokenize(const string &pattern) {
     // make sure we're starting with an empty list of tokens
     tokens.clear();
 
-    // TODO switch statement (maybe)
-
     // loop through the pattern
     for (int i = 0 ; i < pattern.size() ; i++) {
         char ch = pattern[i];
 
         if (ch == '\\') {
             // look at the next char that's being escaped, that will give you the token::KIND
-            // maybe do this in a separate parse_escaped() method
             if (i+1 >= pattern.size()-1) {
                 // then it's the last char and it's not escaping anything, so just add the literal
                 Token t;
@@ -115,7 +112,6 @@ void RegexCompiler::tokenize(const string &pattern) {
 
 void RegexCompiler::parse_escaped(const char ch) {
     // want to match ch to any of the regex things we support, else just save the literal
-    // TODO add \s for whitespace
     Token t;
     switch (ch) {
         case 'd':
@@ -245,10 +241,6 @@ void RegexCompiler::to_postfix() {
                 st.pop();
                 postfix_tokens.push_back(el);
             }
-            if (st.empty() || st.top().kind != Token::KIND::LParen) {
-                // TODO error message, i think we may have confirmed that there is an LParen when we tokenized the input pattern
-            }
-            if (!st.empty()) st.pop();
         }
         //st.push(token);
     }
@@ -267,7 +259,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
         stack<NFAFragment> fragments;
         //vector<unique_ptr<State>> states;
 
-        // TODO if you can allocate space for the vector upfront then you don't need smart pointers
         NFA nfa = NFA();
 
         for (Token& token : tokens) {
@@ -289,7 +280,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                         }
                 case Token::KIND::CharClass:
                         {
-                                // FIXME there's surely a more efficient way of doing this. Add another type to the transition struct for ranges?
                                 // add start and accept states to nfa
                                 State* start = nfa.new_state(false);
                                 State* accept = nfa.new_state(true);
@@ -311,7 +301,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                                 // our to_postfix means that we're in postfix notation, so the operator comes AFTER both operands
                                 // so pop two fragments off the stack for our operands
 
-                                // TODO should there be an error if stack is empty?
                                 if (fragments.size() < 2) throw std::logic_error("Malformed postfix expression: concat needs 2 operands");
 
                                 NFAFragment b = fragments.top();
@@ -332,7 +321,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                 case Token::KIND::Alt:
                         {
                                 // A|B accepts when there is either A or B
-                                // TODO should there be an error if stack is empty?
                                 if (fragments.size() < 2) throw std::logic_error("Malformed postfix expression: alt needs 2 operands");
 
                                 // add start and accept states to nfa
@@ -360,7 +348,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                 case Token::KIND::Star:
                         {
                                 // A* accepts when there are 0 or more A's
-                                // TODO should there be an error if stack is empty?
                                 if (fragments.empty()) throw std::logic_error("Malformed postfix expression: star needs an operand");
 
                                 // add start and accept states to nfa
@@ -386,7 +373,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                 case Token::KIND::Question:
                         {
                                 // A? is equiv to (nothing)|A
-                                // TODO should there be an error if stack is empty?
                                 if (fragments.empty()) throw std::logic_error("Malformed postfix expression: question needs an operand");
 
                                 // add start and accept states to nfa
@@ -410,7 +396,6 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
                         }
                 case Token::KIND::Plus:
                         {
-                                // TODO should there be an error if stack is empty?
                                 if (fragments.empty()) throw std::logic_error("Malformed postfix expression: plus needs an operand");
 
                                 // add start and accept states to nfa
