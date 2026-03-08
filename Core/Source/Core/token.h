@@ -7,7 +7,7 @@ using std::array;
 // Token is a POD-like type (Plain Old Data)
 struct Token {
     // kind of token will be set via an enum for all possible tokens
-    enum class KIND { Literal, CharClass, Star, Plus, Question, Concat, Alt, LParen, RParen, Dot};
+    enum class KIND { Literal, CharClass, Star, Plus, Question, Concat, Alt, LParen, RParen};
     // set default to the literal character
     KIND kind = KIND::Literal;
 
@@ -44,7 +44,6 @@ struct Token {
         switch(kind) {
             case KIND::Literal:
             case KIND::CharClass:
-            case KIND::Dot:
                 return true;
             default:
                 return false;
