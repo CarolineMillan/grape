@@ -39,7 +39,7 @@ void RegexCompiler::tokenize(const string &pattern) {
 
         if (ch == '\\') {
             // look at the next char that's being escaped, that will give you the token::KIND
-            if (i+1 >= pattern.size()-1) {
+            if (i+1 >= pattern.size()) {
                 // then it's the last char and it's not escaping anything, so just add the literal
                 Token t;
                 t.ch = ch;
@@ -127,6 +127,16 @@ void RegexCompiler::parse_escaped(const char ch) {
             t.add_range_to_char_class('A','Z');
             t.add_to_char_class('_');
             break;
+	case 's':
+		// matches all whitespace
+		t.kind = Token::KIND::CharClass;
+		t.add_to_char_class(' ');
+		t.add_to_char_class('\n');
+		t.add_to_char_class('\t');
+		t.add_to_char_class('\r');
+		t.add_to_char_class('\v');
+		t.add_to_char_class('\f');
+		break;
         default:
             t.ch = ch;
             t.kind = Token::KIND::Literal;
