@@ -67,10 +67,10 @@ unordered_set<State*> NFA::dfs(State* start_vertex) {
 
 void NFA::epsilon_closures(unordered_set<State*>& start_states) {
     // adds epsilon closures to start_states
-	// loops through all start_states, including the new ones added in the loop
-	// safe because dfs is called on each state independently before its results are inserted
+	unordered_set<State*> additional_states;
     for (State* state : start_states) {
         unordered_set<State*> closure = dfs(state);
-        start_states.insert(closure.begin(), closure.end());
+        additional_states.insert(closure.begin(), closure.end());
     }
+	start_states.insert(additional_states.begin(), additional_states.end());
 }
