@@ -30,6 +30,8 @@ bool NFA::run(std::string const& input_string) {
             unordered_set<State*> targets = state->get_targets(ch);
             next_candidates.insert(targets.begin(), targets.end());
         }
+	// for substring matching, add the start state back in here
+	next_candidates.insert(start);
         epsilon_closures(next_candidates);
         current_states = std::move(next_candidates);
         //current_states.insert(next_candidates.begin(), next_candidates.end());
