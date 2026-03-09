@@ -14,7 +14,7 @@ struct Token {
     // payloads (some kinds need data, so this is where you store it)
     char ch = 0; // ch value for literals
     bool negate = false; // differentiates [abc] or [^abc]
-    std::array<bool, 256> bitmap; // stores bitmap for character classes, for 256 ascii chars
+    std::array<bool, 256> bitmap{}; // stores bitmap for character classes, for 256 ascii chars
 
     bool is_postfix_unary() const {
         switch (kind) {
@@ -77,9 +77,10 @@ struct Token {
 
     };
 
-    void add_range_to_char_class(char start, char end) {
-        for (char ch = start; ch <= end; ch++) {
+    void add_range_to_char_class(unsigned char start, unsigned char end) {
+        for (unsigned char ch = start; ch <= end; ch++) {
             add_to_char_class(ch);
+		if (ch == end) break;
         }
     };
 
