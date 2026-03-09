@@ -70,7 +70,7 @@ struct Token {
         bitmap.fill(true);
     }
 
-    void add_to_char_class(char ascii) {
+    void add_to_char_class(unsigned char ascii) {
         // takes an ascii and adds it to the bitmap
         if (!negate) {bitmap[ascii] = true;}
         else {bitmap[ascii] = false;}
