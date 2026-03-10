@@ -101,6 +101,16 @@ void RegexCompiler::tokenize(const string &pattern) {
         else if (ch == '.') {
             parse_dot();
         }
+	else if (ch == '^') {
+            Token t;
+            t.kind = Token::KIND::StartAnchor;
+            tokens.push_back(t);
+	}
+	else if (ch == '$') {
+            Token t;
+            t.kind = Token::KIND::EndAnchor;
+            tokens.push_back(t);
+	}
         else {
             Token t;
             t.ch = ch;
@@ -226,7 +236,7 @@ void RegexCompiler::to_postfix() {
     stack<Token> st;
 
     for (const Token& token : concat_tokens) {
-        if (token.is_operand() || token.is_postfix_unary()) {
+        if (token.is_operand() || token.is_postfix_unary() || token.is_anchor()) {
             postfix_tokens.push_back(token);
             continue;
         }
@@ -427,6 +437,14 @@ NFA RegexCompiler::compile(vector<Token>& tokens) {
 
                                 break;
                         }
+                case Token::KIND::StartAnchor: {
+			nfa.start_anchor = true;
+		break;
+			}
+                case Token::KIND::EndAnchor: {
+			nfa.end_anchor = true;
+		break;
+			}
                 default: { break; }
                 }
         }

@@ -24,6 +24,14 @@ bool NFA::run(std::string const& input_string) {
     epsilon_closures(current_states);
 
     for (const char ch : input_string) {
+	if (end_anchor) {
+		// if we have an end anchor, check we're at the end of a line
+		if (ch == '\n') {
+			if (current_states.find(accept) != current_states.end()) {return true;}
+		}
+	} else {
+		if (current_states.find(accept) != current_states.end()) return true;
+	}
         unordered_set<State*> next_candidates;
         for (State* state : current_states) {
             // I want to add to next candidates every time, so initialise it outside of this for loop, then extend it inside this for loop, then get next_states at the end of this for loop (ie next states at the end of the loop for this character)
@@ -31,7 +39,16 @@ bool NFA::run(std::string const& input_string) {
             next_candidates.insert(targets.begin(), targets.end());
         }
 	// for substring matching, add the start state back in here
-	next_candidates.insert(start);
+	// check for anchors too
+	if (start_anchor) {
+		// if we have a start anchor, then check that we're at the beginning of a line
+		if (ch == '\n') {
+			next_candidates.insert(start);
+		}
+	} else {
+			next_candidates.insert(start);
+	}
+	
         epsilon_closures(next_candidates);
         current_states = std::move(next_candidates);
         //current_states.insert(next_candidates.begin(), next_candidates.end());

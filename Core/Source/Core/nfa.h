@@ -22,6 +22,9 @@ public:
     NFA(NFA&&) = default;
     NFA& operator=(NFA&&) = default;
 
+	// add booleans for start and end anchors
+	bool start_anchor = false;
+	bool end_anchor = false;
 
     // add a state to states and return the raw pointer
     State* new_state(bool);
@@ -37,6 +40,7 @@ private:
     // use a unique_ptr so that the addresses are stable as you add to the vector
     vector<unique_ptr<State>> states;
     State* accept = nullptr;
+
 
     // helpers
     void epsilon_closures(unordered_set<State*>& start_states);

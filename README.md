@@ -19,7 +19,7 @@ to build:
 ## Plans:
 
 ### Immediate
-- [ ] adding anchors ^ and $
+- [X] adding anchors ^ and $
 - [ ] reading from files and stdin
 - [ ] print matching line rather than true/false
 - [X] adding'\s' for matching whitespace
@@ -28,4 +28,8 @@ to build:
 ### Future:
 - [ ] multiline support
 - [ ] {n,m} support, counted repetition
+- [ ] backreferences
 - [ ] highlighting
+
+### Maybe one day
+- [ ] use subset construction algorithm to convert the NFA to DFA

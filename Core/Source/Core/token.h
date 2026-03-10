@@ -7,7 +7,7 @@ using std::array;
 // Token is a POD-like type (Plain Old Data)
 struct Token {
     // kind of token will be set via an enum for all possible tokens
-    enum class KIND { Literal, CharClass, Star, Plus, Question, Concat, Alt, LParen, RParen};
+    enum class KIND { Literal, CharClass, Star, Plus, Question, Concat, Alt, LParen, RParen, StartAnchor, EndAnchor};
     // set default to the literal character
     KIND kind = KIND::Literal;
 
@@ -49,6 +49,16 @@ struct Token {
                 return false;
         }
     };
+
+	bool is_anchor() const {
+		switch(kind) {
+			case KIND::StartAnchor:
+			case KIND::EndAnchor:
+				return true;
+			default:
+				return false;
+		}
+	};
 
     static constexpr int get_precedence(KIND kind) {
         switch (kind) {
