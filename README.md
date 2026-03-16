@@ -14,9 +14,8 @@ to build:
 ```make config=debug```
 
 to use:
-```grape -E <regex>```
-then you'll be prompted to enter an input string
-if the regex is found in the input string then it will return true, else false
+```grape -E <regex> <file.txt>```
+if the regex is found in the input string then it will print the matched line
 
 ## What's supported
 
@@ -40,7 +39,8 @@ if the regex is found in the input string then it will return true, else false
 - $ end anchor
 - '\s' matches whitespace
 
-currently matches with a substring in a given input string
+currently searches for a substring in a given input file
+
 
 ## Plans:
 
@@ -54,7 +54,6 @@ currently matches with a substring in a given input string
 - [ ] recursively search a directory
 
 ### Future:
-- [ ] multiline support
 - [ ] {n,m} support, counted repetition
 - [ ] backreferences
 - [ ] highlighting
