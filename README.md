@@ -13,17 +13,45 @@ This project started in a [codecrafter's tutorial](https://app.codecrafters.io/c
 to build:
 ```make config=debug```
 
+to use:
+```grape -E <regex>```
+then you'll be prompted to enter an input string
+if the regex is found in the input string then it will return true, else false
+
 ## What's supported
 
+- '\d' matches digits
+- '\w' matches alphanumeric chars
+- positive character class '[abc]' matches one of abc
+- negative character class '[^abc]' matches any character that isn't one of abc
+- '*' Star matches when there are 0 or more characters matching the character preceding the '*'. i.e. A* matches 0 or more As.
+                                // A* accepts when there are 0 or more A's
+- '+' Plus matches 
+                                // A+ accepts when there are 1 or more A's
+- '?' Question
+                                // A? is equiv to (nothing)|A
+- '|' Alt
+                                // A|B accepts when there is either A or B
+- '()' used for order of operations
+- '.' Dot
+- Concatenation
+- Literal characters
+- ^ start anchor
+- $ end anchor
+- '\s' matches whitespace
+
+currently matches with a substring in a given input string
 
 ## Plans:
 
 ### Immediate
 - [X] adding anchors ^ and $
-- [ ] reading from files and stdin
-- [ ] print matching line rather than true/false
+- [X] reading from files and stdin
+- [X] print matching line rather than true/false
 - [X] adding'\s' for matching whitespace
 - [X] substring matching
+- [ ] search multiple files
+- [ ] recursively search a directory
 
 ### Future:
 - [ ] multiline support

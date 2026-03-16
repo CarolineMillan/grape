@@ -21,3 +21,5 @@ Vendor
 .DS_Store
 cmake-build-debug/
 todo.md
+testing.txt
+
