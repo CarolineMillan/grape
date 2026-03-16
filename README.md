@@ -45,6 +45,8 @@ currently searches for a substring in a given input file
 ## Plans:
 
 ### Immediate
+- [ ] setup github actions
+- [ ] writeup the readme properly
 - [X] adding anchors ^ and $
 - [X] reading from files and stdin
 - [X] print matching line rather than true/false

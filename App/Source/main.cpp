@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     // std::cerr << "Logs from your program will appear here" << std::endl;
     if (argc < 3) {
         std::cerr << "Expected at least three arguments: -E <regex> [file]" << std::endl;
-        return 1;
+        return 2;
     }
 
 	// the tutorial had me create a flag for -E
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     // do i really need this? I don't think I need a flag
     if (flag != "-E") {
         std::cerr << "Expected first argument to be '-E'" << std::endl;
-        return 1;
+        return 2;
     }
 
     try {
@@ -70,6 +70,7 @@ int main(int argc, char* argv[]) {
                 ifs.open(input_file);
                 if (!ifs) {
                     throw std::runtime_error("couldn't open file for reading: " + input_file);
+                    return 2;
                 }
                 input = &ifs;
                 found = run_nfa(input, nfa, found, input_file);
@@ -84,14 +85,14 @@ int main(int argc, char* argv[]) {
 
 
         if (found) {
-            return 1;
+            return 0;
         } else {
             std::cout << "No matches found" << std::endl;
-            return 0;
+            return 1;
         }
     } catch (const std::runtime_error& e) {
         std::cerr << e.what() << std::endl;
-        return 1;
+        return 2;
     }
 }
 

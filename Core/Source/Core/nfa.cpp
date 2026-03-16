@@ -25,10 +25,10 @@ bool NFA::run(std::string const& input_string) {
 
     for (const char ch : input_string) {
 	if (end_anchor) {
-		// if we have an end anchor, check we're at the end of a line
-		if (ch == '\n') {
-			if (current_states.find(accept) != current_states.end()) {return true;}
-		}
+		// [REDUNDANT] if we have an end anchor, check we're at the end of a line
+		//if (ch == '\n') {
+		//	if (current_states.find(accept) != current_states.end()) {return true;}
+		//}
 	} else {
 		if (current_states.find(accept) != current_states.end()) return true;
 	}
@@ -41,10 +41,10 @@ bool NFA::run(std::string const& input_string) {
 	// for substring matching, add the start state back in here
 	// check for anchors too
 	if (start_anchor) {
-		// if we have a start anchor, then check that we're at the beginning of a line
-		if (ch == '\n') {
-			next_candidates.insert(start);
-		}
+		// [REDUNDANT] if we have a start anchor, then check that we're at the beginning of a line
+		//if (ch == '\n') {
+		//	next_candidates.insert(start);
+		//}
 	} else {
 			next_candidates.insert(start);
 	}
