@@ -50,7 +50,7 @@ currently searches for a substring in a given input file
 - [X] print matching line rather than true/false
 - [X] adding'\s' for matching whitespace
 - [X] substring matching
-- [ ] search multiple files
+- [X] search multiple files
 - [ ] recursively search a directory
 
 ### Future:

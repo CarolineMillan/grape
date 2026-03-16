@@ -7,6 +7,22 @@
 
 //throw std::runtime_error("Unhandled pattern " + pattern);
 
+bool run_nfa(std::istream* input, NFA &nfa, bool found, string filename = "") {
+    // loop through the file looking for the regex
+    std::string input_line;
+    while (std::getline(*input, input_line)) {
+        if (nfa.run(input_line)) {
+            if (filename != "") {
+                std::cout << filename << ": " << input_line << std::endl;
+            } else {
+                std::cout << input_line << std::endl;
+            }
+            found = true;
+        }
+    }
+    return found;
+}
+
 int main(int argc, char* argv[]) {
     // Flush after every std::cout / std::cerr
     std::cout << std::unitbuf;
@@ -14,29 +30,10 @@ int main(int argc, char* argv[]) {
 
     // You can use print statements as follows for debugging, they'll be visible when running tests.
     // std::cerr << "Logs from your program will appear here" << std::endl;
-    
-    // accept both file input stream and cin input stream by making the input a pointer to an istream
-    std::istream* input;
-    std::ifstream ifs;
-
-    if (argc == 4) {
-
-        // input filepath
-        std::string input_file = argv[3];
-        ifs.open(input_file);
-        if (!ifs) {
-            throw std::runtime_error("couldn't open file for reading: " + input_file);
-        }
-        input = &ifs;
-    } else if (argc == 3) {
-        // we have an input stirng
-        input = &std::cin;
-
-    } else {
-        std::cerr << "Expected three arguments: -E <regex> [file]" << std::endl;
+    if (argc < 3) {
+        std::cerr << "Expected at least three arguments: -E <regex> [file]" << std::endl;
         return 1;
     }
-
 
 	// the tutorial had me create a flag for -E
 	// if you don't add any other flags then get rid of the flag
@@ -45,20 +42,10 @@ int main(int argc, char* argv[]) {
     std::string pattern = argv[2];
 
     // do i really need this? I don't think I need a flag
-    // what I do need is to figure out how to make this a cli tool that you can use by calling grape
-
     if (flag != "-E") {
         std::cerr << "Expected first argument to be '-E'" << std::endl;
         return 1;
     }
-
-	// here it just prompts you to give an input string
-	// change it so that it reads from a third argument, an input file
-	// read from input file, split it into lines, then just add a loop later on to run the nfa on each line
-	
-
-    //std::string input_line;
-    //std::getline(std::cin, input_line);
 
     try {
         // create nfa here
@@ -68,15 +55,34 @@ int main(int argc, char* argv[]) {
         NFA nfa = compiler.compile(tokens);
 
 
-        // loop through the file looking for the regex
+
+        // accept both file input stream and cin input stream by making the input a pointer to an istream
+        std::istream* input;
+        std::ifstream ifs;
+
         bool found = false;
-		std::string input_line;
-		while (std::getline(*input, input_line)) {
-            if (nfa.run(input_line)) {
-                std::cout << input_line << std::endl;
-                found = true;
+        if (argc > 3) {
+
+            for (int i = 3; i < argc; i++) {
+                // make a helper function that runs the nfa 
+                // input filepath
+                std::string input_file = argv[i];
+                ifs.open(input_file);
+                if (!ifs) {
+                    throw std::runtime_error("couldn't open file for reading: " + input_file);
+                }
+                input = &ifs;
+                found = run_nfa(input, nfa, found, input_file);
+                ifs.close();
+                ifs.clear();
             }
-		}
+        } else if (argc == 3) {
+            // we have an input stirng
+            input = &std::cin;
+            found = run_nfa(input, nfa, found);
+        }
+
+
         if (found) {
             return 1;
         } else {
@@ -88,3 +94,5 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 }
+
+
