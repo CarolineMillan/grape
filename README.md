@@ -1,6 +1,10 @@
-# grape
+# Grape
 
-Grape is a regex engine built on Thomson's NFA algorithm. Currently a work in progress.
+A regex engine in C++ built on Thomson's NFA algorithm.
+
+<!-- TODO: add in a GIF of it being used-->
+
+## Quick Start
 
 ## Motivation
 
@@ -10,11 +14,26 @@ This project started in a [codecrafter's tutorial](https://app.codecrafters.io/c
 
 ## How to use grape
 
+You will be prompted for your password to install grape to ```/usr/local/bin```.
+
+### Windows
+
+Requires `make` to be available — install via [Git for Windows](https://gitforwindows.org/), 
+[MSYS2](https://www.msys2.org/), or [Chocolatey](https://chocolatey.org/) (`choco install make`).
+
+### Linux
+
+### MacOS
+
+(these are for me to use while working on the project)
+
 to build:
 ```make config=debug```
 
 to use:
-```grape -E <regex> <file.txt>```
+
+```grape -E <regex> [file]```
+
 if the regex is found in the input string then it will print the matched line
 
 ## What's supported
@@ -39,26 +58,30 @@ if the regex is found in the input string then it will print the matched line
 - $ end anchor
 - '\s' matches whitespace
 
-currently searches for a substring in a given input file
+currently searches for a substring in a given input file. If no input file is given it will wait for an input string.
 
 
-## Plans:
+## Future Plans:
 
 ### Immediate
 - [ ] setup github actions
 - [ ] writeup the readme properly
-- [X] adding anchors ^ and $
-- [X] reading from files and stdin
-- [X] print matching line rather than true/false
-- [X] adding'\s' for matching whitespace
-- [X] substring matching
-- [X] search multiple files
-- [ ] recursively search a directory
+- [ ] write proper tests using a testing framework like Catch2
 
 ### Future:
+- [ ] recursively search a directory
 - [ ] {n,m} support, counted repetition
-- [ ] backreferences
+- [ ] backreferences ("\(cat) and \1" matches "cat and cat" but not "cat and dog")
 - [ ] highlighting
+- [ ] line numbers
 
 ### Maybe one day
 - [ ] use subset construction algorithm to convert the NFA to DFA
+
+## Acknowledgements and Resources Used
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and open a pull request on the ```main``` branch.
+
+## Licence

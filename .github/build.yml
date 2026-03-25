@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test
+        run: |
+          chmod +x Scripts/Setup-Mac.sh
+          ./Scripts/Setup-Mac.sh
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test
+        run: |
+          chmod +x Scripts/Setup-Linux.sh
+          ./Scripts/Setup-Linux.sh
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install make
+        run: choco install make
+      - name: Build and test
+        run: Scripts\Setup-Windows.bat
