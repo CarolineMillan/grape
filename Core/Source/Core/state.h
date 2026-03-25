@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include <unordered_set>
 #include "transition.h"
 
 using std::vector;
