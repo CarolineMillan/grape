@@ -5,11 +5,13 @@
 ::popd
 ::pause
 
+:: the following is AI generated
 
 @echo off
 setlocal
 
-pushd ..
+:: Move to project root regardless of where script is called from
+cd /d "%~dp0\.."
 
 :: Download Premake if not present
 if not exist "Vendor\Binaries\Premake\Windows\premake5.exe" (
