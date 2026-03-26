@@ -67,17 +67,12 @@ If the regex is found in the input file then it will print the matched line. If 
 
 ## Future Plans:
 
-### Immediate
-- [X] setup github actions
-- [ ] writeup the readme properly
-- [ ] write proper tests using a testing framework like Catch2
-
-### Future:
 - [ ] recursively search a directory
 - [ ] {n,m} support, counted repetition
 - [ ] backreferences ("\(cat) and \1" matches "cat and cat" but not "cat and dog")
 - [ ] highlighting
 - [ ] line numbers
+- [ ] write proper tests using a testing framework like Catch2
 
 ### Maybe one day
 - [ ] use subset construction algorithm to convert the NFA to DFA
