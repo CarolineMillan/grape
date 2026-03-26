@@ -9,7 +9,7 @@ A regex engine in C++ built on Thompson's NFA algorithm.
 ### Mac
 
 ```
-git clone <repo>
+git clone https://github.com/CarolineMillan/grape.git
 cd grape
 chmod +x Scripts/Setup-Mac.sh
 ./Scripts/Setup-Mac.sh
@@ -19,7 +19,7 @@ You'll be prompted for your password to install grape to `/usr/local/bin`. After
 ### Linux
 
 ```
-git clone <repo>
+git clone https://github.com/CarolineMillan/grape.git
 cd grape
 chmod +x Scripts/Setup-Linux.sh
 ./Scripts/Setup-Linux.sh
@@ -30,12 +30,14 @@ You'll be prompted for your password to install grape to `/usr/local/bin`. After
 ### Windows
 
 ```
-git clone <repo>
+git clone https://github.com/CarolineMillan/grape.git
 cd grape
 Scripts\Setup-Windows.bat
 ```
 
 Requires `make` to be available first — install via [Git for Windows](https://gitforwindows.org/), [MSYS2](https://www.msys2.org/), or Chocolatey (`choco install make`). After running the script, `grape.exe` will be copied to `C:\Windows\System32`.
+
+NB: I don't have a Windows machine to test this on, so please let me know if it doesn't work.
 
 ## Motivation
 
