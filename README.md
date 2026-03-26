@@ -1,40 +1,51 @@
 # Grape
 
-A regex engine in C++ built on Thomson's NFA algorithm.
+A regex engine in C++ built on Thompson's NFA algorithm.
 
 <!-- TODO: add in a GIF of it being used-->
 
 ## Quick Start
 
-## Motivation
+### Mac
 
-This project started in a [codecrafter's tutorial](https://app.codecrafters.io/courses/grep/overview). It recommended backtracking but when I was reading about this online I discovered that most regex engines use finite automata instead. I remembered studying them in my undergrad, so I decided to diverge from the tutorial and give it a go.
-
-## How it works -- the theory and why NFA is faster than backtracking
-
-## How to use grape
-
-You will be prompted for your password to install grape to ```/usr/local/bin```.
-
-### Windows
-
-Requires `make` to be available — install via [Git for Windows](https://gitforwindows.org/), 
-[MSYS2](https://www.msys2.org/), or [Chocolatey](https://chocolatey.org/) (`choco install make`).
+```
+git clone <repo>
+cd grape
+chmod +x Scripts/Setup-Mac.sh
+./Scripts/Setup-Mac.sh
+```
+You'll be prompted for your password to install grape to `/usr/local/bin`. After that you can use `grape` from anywhere.
 
 ### Linux
 
-### MacOS
+```
+git clone <repo>
+cd grape
+chmod +x Scripts/Setup-Linux.sh
+./Scripts/Setup-Linux.sh
+```
 
-(these are for me to use while working on the project)
+You'll be prompted for your password to install grape to `/usr/local/bin`. After that you can use `grape` from anywhere.
 
-to build:
-```make config=debug```
+### Windows
 
-to use:
+```
+git clone <repo>
+cd grape
+Scripts\Setup-Windows.bat
+```
+
+Requires `make` to be available first — install via [Git for Windows](https://gitforwindows.org/), [MSYS2](https://www.msys2.org/), or Chocolatey (`choco install make`). After running the script, `grape.exe` will be copied to `C:\Windows\System32`.
+
+## Motivation
+
+This project started in a [CodeCrafter's tutorial](https://app.codecrafters.io/courses/grep/overview). It recommended backtracking but when I was reading about this online I discovered that most regex engines use finite automata instead. I remembered studying them in my undergrad, so I decided to diverge from the tutorial and give it a go.
+
+## How to use grape
 
 ```grape -E <regex> [file]```
 
-if the regex is found in the input string then it will print the matched line
+If the regex is found in the input file then it will print the matched line. If no input file is given it will wait for an input string to use instead.
 
 ## What's supported
 
@@ -42,29 +53,22 @@ if the regex is found in the input string then it will print the matched line
 - '\w' matches alphanumeric chars
 - positive character class '[abc]' matches one of abc
 - negative character class '[^abc]' matches any character that isn't one of abc
-- '*' Star matches when there are 0 or more characters matching the character preceding the '*'. i.e. A* matches 0 or more As.
-                                // A* accepts when there are 0 or more A's
-- '+' Plus matches 
-                                // A+ accepts when there are 1 or more A's
-- '?' Question
-                                // A? is equiv to (nothing)|A
-- '|' Alt
-                                // A|B accepts when there is either A or B
+- '*' Star (A* accepts when there are 0 or more A's)
+- '+' Plus (A+ accepts when there are 1 or more A's)
+- '?' Question (A? is equiv to (nothing)|A)
+- '|' Alt (A|B accepts when there is either A or B)
 - '()' used for order of operations
-- '.' Dot
+- '.' Dot matches any character except \n
 - Concatenation
 - Literal characters
 - ^ start anchor
 - $ end anchor
 - '\s' matches whitespace
 
-currently searches for a substring in a given input file. If no input file is given it will wait for an input string.
-
-
 ## Future Plans:
 
 ### Immediate
-- [ ] setup github actions
+- [X] setup github actions
 - [ ] writeup the readme properly
 - [ ] write proper tests using a testing framework like Catch2
 
@@ -80,8 +84,15 @@ currently searches for a substring in a given input file. If no input file is gi
 
 ## Acknowledgements and Resources Used
 
+- [CodeCrafters grep tutorial](https://app.codecrafters.io/courses/grep/overview) (the starting point for this project)
+- [Rob Pike and Brian Kernighan's article on regex and backtracking](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html) (which led me to explore NFA-based approaches instead)
+- [Russ Cox's article on regex and finite automata](https://swtch.com/~rsc/regexp/regexp1.html)
+- Wikipedia articles on Thompson's construction and shunting yard algorithm
+- I used AI as a sounding board to test understanding and giving feedback on implementation approaches
 ## Contributing
 
 If you'd like to contribute, please fork the repository and open a pull request on the ```main``` branch.
 
 ## Licence
+
+This software is available as open source under the terms of [the MIT licence](https://opensource.org/license/MIT).
