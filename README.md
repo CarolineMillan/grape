@@ -90,6 +90,6 @@ If the regex is found in the input file then it will print the matched line. If 
 
 If you'd like to contribute, please fork the repository and open a pull request on the ```main``` branch.
 
-## Licence
+## License
 
-This software is available as open source under the terms of [the MIT licence](https://opensource.org/license/MIT).
+This software is available as open source under the terms of [the MIT licence](license).
