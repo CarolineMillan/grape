@@ -24,12 +24,7 @@ bool NFA::run(std::string const& input_string) {
     epsilon_closures(current_states);
 
     for (const char ch : input_string) {
-	if (end_anchor) {
-		// [REDUNDANT] if we have an end anchor, check we're at the end of a line
-		//if (ch == '\n') {
-		//	if (current_states.find(accept) != current_states.end()) {return true;}
-		//}
-	} else {
+	if (!end_anchor) {
 		if (current_states.find(accept) != current_states.end()) return true;
 	}
         unordered_set<State*> next_candidates;
@@ -40,18 +35,12 @@ bool NFA::run(std::string const& input_string) {
         }
 	// for substring matching, add the start state back in here
 	// check for anchors too
-	if (start_anchor) {
-		// [REDUNDANT] if we have a start anchor, then check that we're at the beginning of a line
-		//if (ch == '\n') {
-		//	next_candidates.insert(start);
-		//}
-	} else {
+	if (!start_anchor) {
 			next_candidates.insert(start);
 	}
 	
         epsilon_closures(next_candidates);
         current_states = std::move(next_candidates);
-        //current_states.insert(next_candidates.begin(), next_candidates.end());
     }
 
     // if nfa.accept is in current_states, return true, else false

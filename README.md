@@ -63,8 +63,6 @@ If the regex is found in the input file then it will print the matched line. If 
 - '.' Dot matches any character except \n
 - Concatenation
 - Literal characters
-- ^ start anchor
-- $ end anchor
 - '\s' matches whitespace
 
 ## Future Plans:
@@ -75,6 +73,8 @@ If the regex is found in the input file then it will print the matched line. If 
 - [ ] highlighting
 - [ ] line numbers
 - [ ] write proper tests using a testing framework like Catch2
+- [ ] ^ start anchor
+- [ ] $ end anchor
 
 ### Maybe one day
 - [ ] use subset construction algorithm to convert the NFA to DFA
