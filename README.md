@@ -1,6 +1,13 @@
 # Grape
 
-A regex engine in C++ built on Thompson's NFA algorithm.
+An NFA-based regex engine in C++.
+
+## How it works
+
+- Tokenizes the input regex
+- [Shunting-Yard Algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) to convert the tokens to postfix notation
+- [Thompson's Construction algorithm](https://en.wikipedia.org/wiki/Thompson%27s_construction) to construct a Nondeterministic Finite Automata (NFA) from the regex
+- Simulate the NFA with the input string to find a match
 
 <!-- TODO: add in a GIF of it being used-->
 
