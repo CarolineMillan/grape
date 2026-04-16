@@ -15,6 +15,8 @@ An NFA-based regex engine in C++.
 
 This project started in a [CodeCrafter's tutorial](https://app.codecrafters.io/courses/grep/overview). It recommended backtracking but when I was reading about this online I discovered that most regex engines use finite automata instead. I remembered studying them in my undergrad, so I decided to diverge from the tutorial and give it a go.
 
+This NFA approach guarantees linear time on the length of the input and regex (```O(nm)```) and avoids catastophic backtracking (backtracking can grow exponentially on some inputs, ```O(2^n)```).
+
 ## Quick Start
 
 ### Mac
