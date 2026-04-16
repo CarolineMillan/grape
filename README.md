@@ -11,6 +11,10 @@ An NFA-based regex engine in C++.
 
 <!-- TODO: add in a GIF of it being used-->
 
+## Motivation
+
+This project started in a [CodeCrafter's tutorial](https://app.codecrafters.io/courses/grep/overview). It recommended backtracking but when I was reading about this online I discovered that most regex engines use finite automata instead. I remembered studying them in my undergrad, so I decided to diverge from the tutorial and give it a go.
+
 ## Quick Start
 
 ### Mac
@@ -45,10 +49,6 @@ Scripts\Setup-Windows.bat
 Requires `make` to be available first — install via [Git for Windows](https://gitforwindows.org/), [MSYS2](https://www.msys2.org/), or Chocolatey (`choco install make`). After running the script, `grape.exe` will be copied to `C:\Windows\System32`.
 
 NB: I don't have a Windows machine to test this on, so please let me know if it doesn't work.
-
-## Motivation
-
-This project started in a [CodeCrafter's tutorial](https://app.codecrafters.io/courses/grep/overview). It recommended backtracking but when I was reading about this online I discovered that most regex engines use finite automata instead. I remembered studying them in my undergrad, so I decided to diverge from the tutorial and give it a go.
 
 ## How to use grape
 
